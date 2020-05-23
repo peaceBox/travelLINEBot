@@ -12,6 +12,8 @@ const other = require('messages/other.json')
 const contact = require('messages/contact.json')
 const howToUse = require('messages/howToUse.json')
 const travelMes = require('messages/travelMes.json')
+const select = require('messages/select.json')
+
 
 // インスタンス生成
 const client = new line.Client({
@@ -20,7 +22,7 @@ const client = new line.Client({
 
 const lambda = new AWS.Lambda();
 
-module.exports.hello = (event, context, ) => {
+module.exports.hello = (event, context ) => {
   // 署名検証
   const signature = crypto
     .createHmac("sha256", process.env.CHANNELSECRET)
@@ -50,7 +52,7 @@ module.exports.hello = (event, context, ) => {
           message = await postbackFunc(event);
           break;
         case 'join':
-          let tld =  await getTravelId(event)
+          let tld =  await createTravelId(event)
           tld = "@"+tld
         if(tld !== undefined){
           message = [join,{type:"text",text:"以下のtravelIdをメモしておいてください。"},{type:"text",text:tld}];
@@ -93,8 +95,8 @@ const messageFunc = async function (event) {
     message = howToUse
   }
   if(userMes === '@計画'){
-
-    message = howToUse
+    await getTravelId(event)
+    message = select
   }
 
  if (userMes === '@ばいばい') {
@@ -154,7 +156,8 @@ const postbackFunc = async function (event) {
 };
 
 
-const getTravelId = async function (event){
+const createTravelId = async function (event){
+  let group = event.source.groupId
   let params = {
     FunctionName: `travel-lambda-dev-hello`,
     InvocationType: "RequestResponse",
@@ -163,17 +166,31 @@ const getTravelId = async function (event){
       path: "/travel",
       httpMethod: "POST",
       body: JSON.stringify( { 
-         groupId: "XXxxxxxX" 
+         groupId: group
           })
     }),
   };
-
-  JSON.stringify();
-  // 呼び出される側のLambda関数を実行する
-  let result = await lambda.invoke(params).promise(); //おじさん呼びに行って返ってくるまで待つ
+  let result = await lambda.invoke(params).promise(); 
 let res = JSON.parse(result.Payload).body
 let  res2 = JSON.parse(res)
-
 return res2.travelId
+}
 
+const getTravelId = async function (event){
+  let params = {
+    FunctionName: `travel-lambda-dev-hello`,
+    InvocationType: "RequestResponse",
+    Payload: JSON.stringify({
+    type: 'lambda',
+    path: '/user', 
+    httpMethod: 'GET',
+    queryStringParameters: {
+      userId: event.source.groupId
+    }
+}),
+  };
+  let result2 = await lambda.invoke(params).promise(); 
+  let res = JSON.parse(result2.Payload);
+  let res2= JSON.parse(res.body);
+  return res2[0].travelId
 }

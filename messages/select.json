@@ -1,0 +1,228 @@
+{
+  "type": "flex",
+  "altText": "Flex Message",
+  "contents": {
+    "type": "bubble",
+    "direction": "ltr",
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "気になるジャンルアイコンをTAP！",
+          "weight": "bold"
+        },
+        {
+          "type": "separator",
+          "margin": "lg"
+        }
+      ]
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "md",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "action": {
+                "type": "message",
+                "label": "見る",
+                "text": "見る"
+              },
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://1.bp.blogspot.com/-pwYQZYc6tWs/VwoG49A4AHI/AAAAAAAA5ns/_mZdwhTeBvI9MhbPPAf_j7iJVlNSB0w3w/s450/kankou_asia_family.png",
+                  "action": {
+                    "type": "postback",
+                    "label": "見る",
+                    "text": "見る",
+                    "data": "@1-travelId-"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "見る",
+                  "align": "center"
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "action": {
+                "type": "message",
+                "label": "食べる",
+                "text": "食べる"
+              },
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://2.bp.blogspot.com/-OXYLWw2IV6A/WGCxTlg140I/AAAAAAABAqM/NsIzwDF0vSoUJMaX101Cs87_iOzWMGAYgCLcB/s400/omatsuri_okonomiyaki.png",
+                  "action": {
+                    "type": "postback",
+                    "text": "食べる",
+                    "data": "@1-travelId-"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "食べる",
+                  "align": "center"
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "action": {
+                "type": "message",
+                "label": "遊ぶ",
+                "text": "遊ぶ"
+              },
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://3.bp.blogspot.com/-kT9-mbCHOEw/Wm1yuAJmtOI/AAAAAAABJ7A/JHwtLtfdBv8mvB_wruBwqw8A0muGWJbrgCLcBGAs/s400/kids_air_fuwafuwa_yuugu.png",
+                  "action": {
+                    "type": "postback",
+                    "text": "遊ぶ",
+                    "data": "@1-travelId-"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "遊ぶ",
+                  "align": "center",
+                  "action": {
+                    "type": "postback",
+                    "text": "遊ぶ",
+                    "data": "@1-travelId-"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "action": {
+                "type": "message",
+                "label": "遊ぶ",
+                "text": "遊ぶ"
+              },
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://4.bp.blogspot.com/-qIPgbYFC55Y/WxvJrK_YKZI/AAAAAAABMjA/u2wJ8_gohGk9tkXMhUJjov--8qelE0vjgCLcBGAs/s400/car_go_kart_man.png",
+                  "action": {
+                    "type": "postback",
+                    "text": "乗り物",
+                    "data": "@1-travelId-"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "乗り物",
+                  "align": "center"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://3.bp.blogspot.com/-P6ZK7_CU1Is/UmuA4EO_8nI/AAAAAAAAZhc/4XWFy6_YTMA/s400/shopping_cart.png",
+                  "action": {
+                    "type": "postback",
+                    "text": "買い物",
+                    "data": "@1-travelId-"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "買い物",
+                  "align": "center"
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://4.bp.blogspot.com/-LR5Lja-lZ4E/WZVgz8oz0zI/AAAAAAABGE8/dA0DAXWkQFIY23wjjILccR7m8KXHSAzzACLcBGAs/s400/building_hotel_small.png",
+                  "action": {
+                    "type": "postback",
+                    "text": "ホテル",
+                    "data": "@1-travelId-"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "ホテル",
+                  "align": "center"
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://2.bp.blogspot.com/-JBlSHpIjFq4/U82z7wy-rTI/AAAAAAAAjO4/LNDGmgtuJL0/s400/mori.png",
+                  "action": {
+                    "type": "postback",
+                    "text": "その他",
+                    "data": "@1-travelId-"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "その他",
+                  "align": "center"
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://1.bp.blogspot.com/-oHTwbk8S2XA/UsZs9hiczrI/AAAAAAAAcus/czbWBWGEceY/s400/syugakuryokou_airplane.png",
+                  "action": {
+                    "type": "postback",
+                    "text": "全部",
+                    "data": "@1-travelId-"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "全部",
+                  "align": "center"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
