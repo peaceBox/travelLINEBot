@@ -50,8 +50,13 @@ module.exports.hello = (event, context, ) => {
           message = await postbackFunc(event);
           break;
         case 'join':
-          message = [join,{type:"text",text:event.source.groupId}];
+          let tld =  await getTravelId(event)
+          tld = "@"+tld
+        if(tld !== undefined){
+          message = [join,{type:"text",text:"以下のtravelIdをメモしておいてください。"},{type:"text",text:tld}];
           break;
+        }
+          
       }
       // メッセージを返信
       if (message != undefined) {
@@ -147,3 +152,28 @@ const postbackFunc = async function (event) {
   };
   return message;
 };
+
+
+const getTravelId = async function (event){
+  let params = {
+    FunctionName: `travel-lambda-dev-hello`,
+    InvocationType: "RequestResponse",
+    Payload: JSON.stringify({
+      type: "lambda",
+      path: "/travel",
+      httpMethod: "POST",
+      body: JSON.stringify( { 
+         groupId: "XXxxxxxX" 
+          })
+    }),
+  };
+
+  JSON.stringify();
+  // 呼び出される側のLambda関数を実行する
+  let result = await lambda.invoke(params).promise(); //おじさん呼びに行って返ってくるまで待つ
+let res = JSON.parse(result.Payload).body
+let  res2 = JSON.parse(res)
+
+return res2.travelId
+
+}
