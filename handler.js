@@ -147,11 +147,74 @@ const messageFunc = async function (event) {
 
 
 const postbackFunc = async function (event) {
+  let data = event.postback.data
   let message;
-  message = {
-    type: "text",
-    text: "ポストバックイベントを受け付けました！"
-  };
+
+  if(data === '見る'){
+    message = await getTravelId(event)
+
+  }
+  if(data === '見る/自然景観'){
+
+  }
+  if(data === '見る/文化施設'){
+
+  }
+  if(data === '見る/神社仏閣'){
+
+  }
+  if(data === '見る/文化史跡'){
+
+  }
+  if(data === '見る/公園/庭園'){
+
+  }
+  if(data === '見る/動/植物'){
+
+  }
+  if(data === '見る/施設景観'){
+
+  }
+  if(data === '見る/その他'){
+
+  }
+  if(data === '見る/全部'){
+
+  }
+  if(data === '食べる'){
+    
+  }
+  if(data === '遊ぶ/文化施設'){
+    
+  }
+  if(data === '遊ぶ/温泉'){
+    
+  }
+  if(data === '遊ぶ/その他'){
+    
+  }
+  if(data === '遊ぶ/スポーツ/レジャー'){
+    
+  }
+  if(data === '遊ぶ/全部'){
+    
+  }
+  if(data === '乗り物'){
+    
+  }
+  if(data === '買い物'){
+    
+  }
+  if(data === 'ホテル'){
+    
+  }
+  if(data === 'その他'){
+    
+  }
+  if(data === '全部'){
+    
+  }
+
   return message;
 };
 
