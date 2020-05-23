@@ -172,8 +172,6 @@ let res = JSON.parse(result.Payload).body
 let  res2 = JSON.parse(res)
 console.log(res2.travelId)
 
-  // 呼び出される側のLambda関数を実行する
-  let result = await lambda.invoke(params).promise(); //おじさん呼びに行って返ってくるまで待つ
  console.log(`travelID:${result}`)
 
 }
