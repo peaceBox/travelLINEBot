@@ -2,6 +2,7 @@
 // モジュール呼び出し
 const crypto = require("crypto");
 const line = require("@line/bot-sdk");
+const AWS = require("aws-sdk");
 
 //メッセージ呼び出し
 const join = require('messages/join.json')
@@ -16,6 +17,8 @@ const travelMes = require('messages/travelMes.json')
 const client = new line.Client({
   channelAccessToken: process.env.ACCESSTOKEN
 });
+
+const lambda = new AWS.Lambda();
 
 module.exports.hello = (event, context, ) => {
   // 署名検証
@@ -85,6 +88,7 @@ const messageFunc = async function (event) {
     message = howToUse
   }
   if(userMes === '@計画'){
+    
     message = howToUse
   }
 
