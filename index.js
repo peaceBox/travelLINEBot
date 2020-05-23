@@ -2,6 +2,9 @@
 // モジュール呼び出し
 const crypto = require("crypto");
 const line = require("@line/bot-sdk");
+
+//メッセージ呼び出し
+const add = require('messages/add.json')
 const site = require('messages/site.json')
 const other = require('messages/other.json')
 const contact = require('messages/contact.json')
@@ -32,8 +35,7 @@ exports.handler = (event, context,) => {
           break;
         // フォローイベント
         case "follow":
-          message ={ "type": "text", "text": "友達登録ありがとうございます。「トラべる！」広島県版です。広島県の旅を「広島県観光地オープンデータ」を基に開発し、実際にその場所に行ってみた人からの安心して観光できたかの評価によって成り立っていく旅行計画を立ててくれる公式アカウントです。グループLINEに招待して使います。"
-          };
+          message =add;
           break;
         // ポストバックイベント
         case "postback":
