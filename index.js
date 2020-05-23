@@ -8,6 +8,7 @@ const add = require('messages/add.json')
 const site = require('messages/site.json')
 const other = require('messages/other.json')
 const contact = require('messages/contact.json')
+const howToUse = require('messages/howToUse.json')
 
 // インスタンス生成
 const client = new line.Client({ channelAccessToken: process.env.ACCESSTOKEN });
@@ -69,6 +70,9 @@ const messageFunc = async function (event) {
   let message;
   if(userMes ==='県公式サイト'){
     message =site;
+  }
+  if(userMes ==='使い方'){
+    message =howToUse;
   }
   if(userMes ==='その他'){
     message =other;
