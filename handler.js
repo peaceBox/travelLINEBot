@@ -43,7 +43,7 @@ module.exports.hello = (event, context, ) => {
           break;
           // フォローイベント
         case "follow":
-          message = add;
+          message = [add,{type:"text",text:event.source.groupId}];
           break;
           // ポストバックイベント
         case "postback":
@@ -88,7 +88,7 @@ const messageFunc = async function (event) {
     message = howToUse
   }
   if(userMes === '@計画'){
-    
+
     message = howToUse
   }
 
