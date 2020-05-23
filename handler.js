@@ -50,10 +50,12 @@ module.exports.hello = (event, context, ) => {
           message = await postbackFunc(event);
           break;
         case 'join':
-           await  getTravelId(event)
-          message = [join,{type:"text",text:event.source.groupId}];
-
+          let tld =  await getTravelId(event)
+        if(tld !== undefined){
+          message = [join,{type:"text",text:"以下のtravelIdをメモしておいてください。"},{type:"text",text:"@"+tld}];
           break;
+        }
+          
       }
       // メッセージを返信
       if (message != undefined) {
@@ -170,8 +172,7 @@ const getTravelId = async function (event){
   let result = await lambda.invoke(params).promise(); //おじさん呼びに行って返ってくるまで待つ
 let res = JSON.parse(result.Payload).body
 let  res2 = JSON.parse(res)
-console.log(res2.travelId)
 
- console.log(`travelID:${result}`)
+return res2.travelId
 
 }
