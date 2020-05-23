@@ -17,7 +17,7 @@ const client = new line.Client({
   channelAccessToken: process.env.ACCESSTOKEN
 });
 
-exports.handler = (event, context, ) => {
+module.exports.hello = (event, context, ) => {
   // 署名検証
   const signature = crypto
     .createHmac("sha256", process.env.CHANNELSECRET)
