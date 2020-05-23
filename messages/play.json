@@ -1,0 +1,138 @@
+{
+  "type": "flex",
+  "altText": "Flex Message",
+  "contents": {
+    "type": "bubble",
+    "direction": "ltr",
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "「遊ぶ」を探す",
+          "weight": "bold"
+        },
+        {
+          "type": "separator",
+          "margin": "lg"
+        }
+      ]
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "margin": "xs",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "margin": "md",
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://1.bp.blogspot.com/-Y2WCNS2K-HM/XVjgI3zZh2I/AAAAAAABUMk/tM-BaqaPHpYV2Nofl9wRpjlgLoZ9bJISgCLcBGAs/s500/japan_gassyoudukuri_syuuraku.png",
+                  "action": {
+                    "type": "postback",
+                    "data": "遊ぶ/文化施設"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "文化施設",
+                  "align": "center",
+                  "wrap": false
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://3.bp.blogspot.com/-uI0hmGpj9-0/VhHgk7W6kPI/AAAAAAAAy_8/G5rT-3HL3p8/s400/onsen_saru.png",
+                  "action": {
+                    "type": "postback",
+                    "data": "遊ぶ/温泉"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "温泉",
+                  "align": "center"
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://2.bp.blogspot.com/-4hszElASaRw/VvKZGZuFWLI/AAAAAAAA5E8/acbQYc6A_FI60Y9Pp89tMWhDtXLPipFOw/s450/poket_park.png",
+                  "action": {
+                    "type": "postback",
+                    "data": "遊ぶ/その他"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "その他",
+                  "align": "center"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "vertical",
+              "margin": "md",
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://3.bp.blogspot.com/-ZFB-AW1EW7k/W-0hMeAzAnI/AAAAAAABQQA/gXUYTDgriQwiwsz4GcM1pfiqpGeETT_CwCLcBGAs/s400/undou_sports_family_chichi_musuko.png",
+                  "action": {
+                    "type": "postback",
+                    "data": "遊ぶ/スポーツ/レジャー"
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "スポーツ/レジャー",
+                  "align": "center",
+                  "wrap": false
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "image",
+                  "url": "https://1.bp.blogspot.com/-oHTwbk8S2XA/UsZs9hiczrI/AAAAAAAAcus/czbWBWGEceY/s400/syugakuryokou_airplane.png"
+                },
+                {
+                  "type": "text",
+                  "text": "全部",
+                  "align": "center"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

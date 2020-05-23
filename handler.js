@@ -14,6 +14,7 @@ const howToUse = require('messages/howToUse.json')
 const travelMes = require('messages/travelMes.json')
 const select = require('messages/select.json')
 const see = require('messages/see.json')
+const play = require('messages/plya.json')
 // インスタンス生成
 const client = new line.Client({
   channelAccessToken: process.env.ACCESSTOKEN
@@ -184,6 +185,11 @@ const postbackFunc = async function (event) {
   if(data === '食べる'){
     
   }
+  if(data === '遊ぶ'){
+    message = play
+    
+  }
+
   if(data === '遊ぶ/文化施設'){
     
   }
@@ -199,6 +205,7 @@ const postbackFunc = async function (event) {
   if(data === '遊ぶ/全部'){
     
   }
+
   if(data === '乗り物'){
     
   }
