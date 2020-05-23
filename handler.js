@@ -1,17 +1,17 @@
-"use strict";
+'use strict';
 // モジュール呼び出し
-const crypto = require("crypto");
-const line = require("@line/bot-sdk");
-const AWS = require("aws-sdk");
+const crypto = require('crypto');
+const line = require('@line/bot-sdk');
+const AWS = require('aws-sdk');
 
 //メッセージ呼び出し
-const join = require('messages/join.json')
-const add = require('messages/add.json')
-const site = require('messages/site.json')
-const other = require('messages/other.json')
-const contact = require('messages/contact.json')
-const howToUse = require('messages/howToUse.json')
-const travelMes = require('messages/travelMes.json')
+const join = require('messages/join.json');
+const add = require('messages/add.json');
+const site = require('messages/site.json');
+const other = require('messages/other.json');
+const contact = require('messages/contact.json');
+const howToUse = require('messages/howToUse.json');
+const travelMes = require('messages/travelMes.json');
 
 // インスタンス生成
 const client = new line.Client({
@@ -23,10 +23,10 @@ const lambda = new AWS.Lambda();
 module.exports.hello = (event, context, ) => {
   // 署名検証
   const signature = crypto
-    .createHmac("sha256", process.env.CHANNELSECRET)
+    .createHmac('sha256', process.env.CHANNELSECRET)
     .update(event.body)
-    .digest("base64");
-  const checkHeader = (event.headers || {})["X-Line-Signature"];
+    .digest('base64');
+  const checkHeader = (event.headers || {})['X-Line-Signature'];
   const body = JSON.parse(event.body);
   const events = body.events;
   console.log(events);
@@ -38,26 +38,29 @@ module.exports.hello = (event, context, ) => {
       // イベントタイプごとに関数を分ける
       switch (event.type) {
         // メッセージイベント
-        case "message":
+        case 'message':
           message = await messageFunc(event);
           break;
           // フォローイベント
-        case "follow":
+        case 'follow':
           message = add;
           break;
           // ポストバックイベント
-        case "postback":
+        case 'postback':
           message = await postbackFunc(event);
           break;
         case 'join':
           // let tld =  await getTravelId(event)
-        
- 
+
+
           // message = [join,{type:"text",text:tld}];
-        message = {type:"text",text:"sa"}
+          message = {
+            type: 'text',
+            text: 'sa'
+          };
           break;
-        
-          
+
+
       }
       // メッセージを返信
       if (message != undefined) {
@@ -67,7 +70,7 @@ module.exports.hello = (event, context, ) => {
             const lambdaResponse = {
               statusCode: 200,
               headers: {
-                "X-Line-Status": "OK"
+                'X-Line-Status': 'OK'
               },
               body: '{"result":"completed"}',
             };
@@ -79,7 +82,7 @@ module.exports.hello = (event, context, ) => {
   }
   // 署名検証に失敗した場合
   else {
-    console.log("署名認証エラー");
+    console.log('署名認証エラー');
   }
 };
 
@@ -89,21 +92,21 @@ const messageFunc = async function (event) {
   let message;
   var headMes = userMes.slice(0, 1);
 
- 
-  if(userMes === '@使い方'){
-    message = howToUse
-  }
-  if(userMes === '@計画'){
 
-    message = howToUse
+  if (userMes === '@使い方') {
+    message = howToUse;
+  }
+  if (userMes === '@計画') {
+
+    message = howToUse;
   }
 
- if (userMes === '@ばいばい') {
-    if(event.source.roomId !== undefined){
-     return  client.leaveRoom(event.source.roomId)
+  if (userMes === '@ばいばい') {
+    if (event.source.roomId !== undefined) {
+      return client.leaveRoom(event.source.roomId);
     }
-    if(event.source.groupId !== undefined){
-     return client.leaveGroup(event.source.groupId)
+    if (event.source.groupId !== undefined) {
+      return client.leaveGroup(event.source.groupId);
     }
   }
 
@@ -112,7 +115,7 @@ const messageFunc = async function (event) {
 
 
   if (userMes === 'トラべる！') {
-    message = travelMes
+    message = travelMes;
   }
   if (userMes === '県公式サイト') {
     message = site;
@@ -138,7 +141,7 @@ const messageFunc = async function (event) {
     //そのデータをデータに埋め込んだメッセージを送る
     //ない場合はありませんでした。を返す
   }
-  
+
 
   return message;
 };
@@ -148,33 +151,33 @@ const messageFunc = async function (event) {
 const postbackFunc = async function (event) {
   let message;
   message = {
-    type: "text",
-    text: "ポストバックイベントを受け付けました！"
+    type: 'text',
+    text: 'ポストバックイベントを受け付けました！'
   };
   return message;
 };
 
 
-const getTravelId = async function (event){
+const getTravelId = async function (event) {
   let params = {
-    FunctionName: `travel-lambda-dev-hello`,
-    InvocationType: "RequestResponse",
+    FunctionName: 'travel-lambda-dev-hello',
+    InvocationType: 'RequestResponse',
     Payload: JSON.stringify({
-      type: "lambda",
-      path: "/travel",
-      httpMethod: "POST",
-      body: JSON.stringify( { 
-         groupId: "XXxxxxxX" 
-          })
+      type: 'lambda',
+      path: '/travel',
+      httpMethod: 'POST',
+      body: JSON.stringify({
+        groupId: 'XXxxxxxX'
+      })
     }),
   };
 
 
   // 呼び出される側のLambda関数を実行する
   let result = await lambda.invoke(params).promise(); //おじさん呼びに行って返ってくるまで待つ
-let res = JSON.parse(result.Payload).body
-let  res2 = JSON.parse(res)
+  let res = JSON.parse(result.Payload).body;
+  let res2 = JSON.parse(res);
 
-return res2.travelId
+  return res2.travelId;
 
-}
+};
