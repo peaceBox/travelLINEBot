@@ -13,8 +13,7 @@ const contact = require('messages/contact.json')
 const howToUse = require('messages/howToUse.json')
 const travelMes = require('messages/travelMes.json')
 const select = require('messages/select.json')
-
-
+const see = require('messages/see.json')
 // インスタンス生成
 const client = new line.Client({
   channelAccessToken: process.env.ACCESSTOKEN
@@ -151,7 +150,8 @@ const postbackFunc = async function (event) {
   let message;
 
   if(data === '見る'){
-    message = await getTravelId(event)
+    message =see
+
 
   }
   if(data === '見る/自然景観'){
