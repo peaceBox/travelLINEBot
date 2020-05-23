@@ -50,12 +50,13 @@ module.exports.hello = (event, context, ) => {
           message = await postbackFunc(event);
           break;
         case 'join':
-          let tld =  await getTravelId(event)
+          // let tld =  await getTravelId(event)
         
-        if(tld !== undefined){
-          message = [join,{type:"text",text:tld}];
+ 
+          // message = [join,{type:"text",text:tld}];
+        message = {type:"text",text:"sa"}
           break;
-        }
+        
           
       }
       // メッセージを返信
@@ -168,7 +169,7 @@ const getTravelId = async function (event){
     }),
   };
 
-  JSON.stringify();
+
   // 呼び出される側のLambda関数を実行する
   let result = await lambda.invoke(params).promise(); //おじさん呼びに行って返ってくるまで待つ
 let res = JSON.parse(result.Payload).body
