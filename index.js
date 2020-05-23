@@ -3,6 +3,8 @@
 const crypto = require("crypto");
 const line = require("@line/bot-sdk");
 const site = require('messages/site.json')
+const other = require('messages/other.json')
+const contact = require('messages/contact.json')
 
 // インスタンス生成
 const client = new line.Client({ channelAccessToken: process.env.ACCESSTOKEN });
@@ -64,9 +66,15 @@ const messageFunc = async function (event) {
   let userMes = event.message.text;
   let message;
   if(userMes ==='県公式サイト'){
-
     message =site;
   }
+  if(userMes ==='その他'){
+    message =other;
+  }
+  if(userMes ==='水平展開を提案する'){
+    message =contact;
+  }
+
   return message;
 };
 
