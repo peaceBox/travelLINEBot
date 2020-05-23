@@ -51,8 +51,9 @@ module.exports.hello = (event, context, ) => {
           break;
         case 'join':
           let tld =  await getTravelId(event)
+          tld = "@"+tld
         if(tld !== undefined){
-          message = [join,{type:"text",text:"以下のtravelIdをメモしておいてください。"},{type:"text",text:"@"+tld}];
+          message = [join,{type:"text",text:"以下のtravelIdをメモしておいてください。"},{type:"text",text:tld}];
           break;
         }
           
