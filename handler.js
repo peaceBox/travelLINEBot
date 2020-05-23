@@ -43,14 +43,14 @@ module.exports.hello = (event, context, ) => {
           break;
           // フォローイベント
         case "follow":
-          message = [add,{type:"text",text:event.source.groupId}];
+          message = add;
           break;
           // ポストバックイベント
         case "postback":
           message = await postbackFunc(event);
           break;
         case 'join':
-          message = join;
+          message = [join,{type:"text",text:event.source.groupId}];
           break;
       }
       // メッセージを返信
