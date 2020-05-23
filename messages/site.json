@@ -1,0 +1,44 @@
+{
+  "type": "flex",
+  "altText": "Flex Message",
+  "contents": {
+    "type": "bubble",
+    "direction": "ltr",
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "最新の情報を確認する",
+          "align": "center"
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "action": {
+            "type": "uri",
+            "label": "県ホームページ",
+            "uri": "https://www.pref.hiroshima.lg.jp/"
+          },
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "uri",
+            "label": "県/観光ホームページ",
+            "uri": "https://www.hiroshima-kankou.com/"
+          },
+          "style": "primary"
+        }
+      ]
+    }
+  }
+}
