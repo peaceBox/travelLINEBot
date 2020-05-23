@@ -63,8 +63,10 @@ exports.handler = (event, context,) => {
 const messageFunc = async function (event) {
   let userMes = event.message.text;
   let message;
-  if(userMes ==='県公式サイト')
-  message =site;
+  if(userMes ==='県公式サイト'){
+
+    message =site;
+  }
   return message;
 };
 
