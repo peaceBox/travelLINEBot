@@ -16,6 +16,8 @@ const select = require('messages/select.json');
 const see = require('messages/see.json');
 const play = require('messages/play.json');
 const map = require('messages/map.json');
+const rate = require('messages/rate.json');
+const rateBase = require('messages/rateBase.json');
 // インスタンス生成
 const client = new line.Client({
   channelAccessToken: process.env.ACCESSTOKEN
@@ -101,7 +103,7 @@ const messageFunc = async function (event) {
   let message;
   var headMes = userMes.slice(0, 1);
 
-  if (message.length === 32 && message.match(/^[A-Za-z0-9]*$/)) {
+  if (userMes.length === 32 && message.match(/^[A-Za-z0-9]*$/)) {
     let idParams = {
       FunctionName: 'travel-lambda-dev-hello',
       InvocationType: 'RequestResponse',
@@ -130,21 +132,30 @@ const messageFunc = async function (event) {
       message = howToUse;
       break;
     case '@計画':
-      await getTravelId(event);
+      await getGroupTravelId(event);
       message = select;
       break;
     case '@ばいばい':
       client.leaveGroup(event.source.groupId);
       break;
+    case '@評価':
+      /*const place = await getPlace(event, travelId);
+
+      for (const property in place) {
+        const placeId = place[property]['placeId'];
+      }
+
+      break;*/
     case 'トラべる！':
-      const travelId = await getTravelId(event);
-      if (travelId === []) {
-        message = travelMes;
-      } else {
+      const res = await getTravelId(event);
+      console.log(typeof (res));
+      if (res === '[]') {
         message = {
           type: 'text',
-          text: `行程表はこちらです\n${url}?travelId=${travelId}`
+          text: `行程表はこちらです\n${url}?travelId=${res.travelId}`
         };
+      } else {
+        message = travelMes;
       }
       break;
     case '県公式サイト':
@@ -247,7 +258,7 @@ const DelTravelId = async function (event) {
 };
 
 
-const getTravelId = async function (event) {
+const getGroupTravelId = async function (event) {
   let idParams = {
     FunctionName: 'travel-lambda-dev-hello',
     InvocationType: 'RequestResponse',
@@ -257,6 +268,46 @@ const getTravelId = async function (event) {
       httpMethod: 'GET',
       queryStringParameters: {
         userId: event.source.groupId
+      }
+    }),
+  };
+  let result2 = await lambda.invoke(idParams).promise();
+  let res = JSON.parse(result2.Payload);
+  console.log(res);
+  let res2 = JSON.parse(res.body);
+  return res2[0].travelId;
+};
+
+const getTravelId = async function (event) {
+  let idParams = {
+    FunctionName: 'travel-lambda-dev-hello',
+    InvocationType: 'RequestResponse',
+    Payload: JSON.stringify({
+      type: 'lambda',
+      path: '/user',
+      httpMethod: 'GET',
+      queryStringParameters: {
+        userId: event.source.userId
+      }
+    }),
+  };
+  let result2 = await lambda.invoke(idParams).promise();
+  let res = JSON.parse(result2.Payload);
+  console.log(res);
+  let res2 = JSON.parse(res.body);
+  return res2;
+};
+
+const getPlace = async function (event, travelId) {
+  let idParams = {
+    FunctionName: 'travel-lambda-dev-hello',
+    InvocationType: 'RequestResponse',
+    Payload: JSON.stringify({
+      type: 'lambda',
+      path: '/place',
+      httpMethod: 'GET',
+      queryStringParameters: {
+        travelId: event.source.travelId
       }
     }),
   };
