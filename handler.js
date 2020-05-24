@@ -102,6 +102,22 @@ const messageFunc = async function (event) {
   var headMes = userMes.slice(0, 1);
 
   if (message.length === 32 && message.match(/^[A-Za-z0-9]*$/)) {
+    let idParams = {
+      FunctionName: 'travel-lambda-dev-hello',
+      InvocationType: 'RequestResponse',
+      Payload: JSON.stringify({
+        type: 'lambda',
+        path: '/user',
+        httpMethod: 'GET',
+        queryStringParameters: {
+          userId: event.source.groupId
+        }
+      }),
+    };
+    let result2 = await lambda.invoke(idParams).promise();
+    let res = JSON.parse(result2.Payload);
+    let res2 = JSON.parse(res.body);
+    let travelId = res2[0].travelId;
     await postUser(event, travelId);
     message = {
       type: 'text',
