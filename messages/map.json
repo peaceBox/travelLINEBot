@@ -1,0 +1,59 @@
+{
+  "type": "flex",
+  "altText": "Flex Message",
+  "contents": {
+    "type": "bubble",
+    "direction": "ltr",
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [{
+        "type": "text",
+        "text": "希望の地域を選択",
+        "align": "center"
+      }]
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [{
+          "type": "button",
+          "action": {
+            "type": "uri",
+            "label": "広島市",
+            "uri": "https://linecorp.com"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "uri",
+            "label": "尾道市",
+            "uri": "https://linecorp.com"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "uri",
+            "label": "廿日市市",
+            "uri": "https://linecorp.com"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "uri",
+            "label": "全域",
+            "uri": "https://linecorp.com"
+          }
+        }
+      ]
+    },
+    "styles": {
+      "header": {
+        "backgroundColor": "#ECA24E"
+      }
+    }
+  }
+}
