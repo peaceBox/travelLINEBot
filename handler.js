@@ -18,6 +18,7 @@ const play = require('messages/play.json');
 const map = require('messages/map.json');
 const rate = require('messages/rate.json');
 const rateBase = require('messages/rateBase.json');
+const view = require('messages/view.json')
 // インスタンス生成
 const client = new line.Client({
   channelAccessToken: process.env.ACCESSTOKEN
@@ -130,6 +131,26 @@ const messageFunc = async function (event) {
   }
 
   switch (userMes) {
+    case '@閲覧':
+      let idParams = {
+        FunctionName: 'travel-lambda-dev-hello',
+        InvocationType: 'RequestResponse',
+        Payload: JSON.stringify({
+          type: 'lambda',
+          path: '/user',
+          httpMethod: 'GET',
+          queryStringParameters: {
+            userId: event.source.groupId
+          }
+        }),
+      };
+      let result2 = await lambda.invoke(idParams).promise();
+      let res = JSON.parse(result2.Payload);
+      let res2 = JSON.parse(res.body);
+      let travelId = res2[0].travelId;
+      message = view;
+      message.contents.footer.contents[0].action.uri = `https://drlk1grerpelq.cloudfront.net/view?travelId=${travelId}`
+      break;
     case '@使い方':
       message = howToUse;
       break;

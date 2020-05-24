@@ -1,0 +1,29 @@
+{
+  "type": "flex",
+  "altText": "Flex Message",
+  "contents": {
+    "type": "bubble",
+    "direction": "ltr",
+    "hero": {
+      "type": "image",
+      "url": "https://4.bp.blogspot.com/-rOzYMKrk__0/VEETO6lR1vI/AAAAAAAAobw/DNuXz6gwlaA/s400/war_building_genbaku_dome.png",
+      "size": "full",
+      "aspectRatio": "1.51:1",
+      "aspectMode": "fit"
+    },
+    "footer": {
+      "type": "box",
+      "layout": "horizontal",
+      "contents": [
+        {
+          "type": "button",
+          "action": {
+            "type": "uri",
+            "label": "工程表",
+            "uri": "https://linecorp.com"
+          }
+        }
+      ]
+    }
+  }
+}
