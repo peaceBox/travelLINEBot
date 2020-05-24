@@ -25,7 +25,9 @@ const client = new line.Client({
 
 const lambda = new AWS.Lambda();
 
+
 const url = 'https://travel.sugokunaritai.dev';
+
 
 module.exports.hello = (event, context) => {
   // 署名検証
