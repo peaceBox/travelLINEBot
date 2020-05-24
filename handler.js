@@ -211,10 +211,10 @@ const postbackFunc = async function (event) {
       break;
     default:
       message = map;
-      message.contents.body.contents[0].action.uri = `${url}?genre=${encodeURI(data)}&lat=34.385273&lng=132.455050&travelId=${travelId}`;
-      message.contents.body.contents[1].action.uri = `${url}?genre=${encodeURI(data)}&lat=34.409314&lng=133.205692&travelId=${travelId}`;
-      message.contents.body.contents[2].action.uri = `${url}?genre=${encodeURI(data)}&lat=34.348144&lng=132.332069&travelId=${travelId}`;
-      message.contents.body.contents[3].action.uri = `${url}?genre=${encodeURI(data)}&lat=34.402934&lng=132.456019&travelId=${travelId}`;
+      message.contents.body.contents[0].action.uri = `${url}?type=${encodeURI(data)}&lat=34.385273&lng=132.455050&travelId=${travelId}`;
+      message.contents.body.contents[1].action.uri = `${url}?type=${encodeURI(data)}&lat=34.409314&lng=133.205692&travelId=${travelId}`;
+      message.contents.body.contents[2].action.uri = `${url}?type=${encodeURI(data)}&lat=34.348144&lng=132.332069&travelId=${travelId}`;
+      message.contents.body.contents[3].action.uri = `${url}?type=${encodeURI(data)}&lat=34.402934&lng=132.456019&travelId=${travelId}`;
       break;
   }
   return message;
