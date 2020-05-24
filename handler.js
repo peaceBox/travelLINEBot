@@ -145,11 +145,11 @@ const messageFunc = async function (event) {
         }),
       };
       let result2 = await lambda.invoke(idParams).promise();
-      let res = JSON.parse(result2.Payload);
-      let res2 = JSON.parse(res.body);
-      let travelId = res2[0].travelId;
+      let res12 = JSON.parse(result2.Payload);
+      let res23 = JSON.parse(res12.body);
+      let travelId = res23[0].travelId;
       message = view;
-      message.contents.footer.contents[0].action.uri = `https://drlk1grerpelq.cloudfront.net/view?travelId=${travelId}`
+      message.contents.footer.contents[0].action.uri = `https://travel.sugokunaritai.dev/view?travelId=${travelId}`
       break;
     case '@使い方':
       message = howToUse;
