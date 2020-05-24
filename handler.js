@@ -56,7 +56,7 @@ module.exports.hello = (event, context) => {
           break;
         case 'join':
           let tld = await createTravelId(event);
-          tld = '@' + tld;
+          // tld = '@' + tld;
           if (tld !== undefined) {
             message = [join, {
               type: 'text',
@@ -101,60 +101,55 @@ const messageFunc = async function (event) {
   let message;
   var headMes = userMes.slice(0, 1);
 
-
-  if (userMes === '@使い方') {
-    message = howToUse;
-  }
-  if (userMes === '@計画') {
-    await getTravelId(event);
-    message = select;
-  }
-
-  if (userMes === '@ばいばい') {
-    return client.leaveGroup(event.source.groupId);
+  if (message.length === 32 && message.match(/^[A-Za-z0-9]*$/)) {
+    await postUser(event, travelId);
+    message = {
+      type: 'text',
+      text: '紐付けが完了しました！\n「トラべる！」を押すと行程表が確認できます。'
+    };
   }
 
+  switch (userMes) {
+    case '@使い方':
+      message = howToUse;
+      break;
+    case '@計画':
+      await getTravelId(event);
+      message = select;
+      break;
+    case '@ばいばい':
+      client.leaveGroup(event.source.groupId);
+      break;
+    case 'トラべる！':
+      const travelId = await getTravelId(event);
+      if (travelId === []) {
+        message = travelMes;
+      } else {
+        message = {
+          type: 'text',
+          text: `行程表はこちらです\n${url}?travelId=${travelId}`
+        };
+      }
+      break;
+    case '県公式サイト':
+      message = site;
+      break;
+    case '使い方':
+      message = howToUse;
+      break;
+    case 'その他':
+      message = other;
+      break;
+    case '水平展開を提案する':
+      message = contact;
+      break;
 
-
-
-
-  if (userMes === 'トラべる！') {
-    message = travelMes;
+    default:
+      break;
   }
-  //完成
-  if (userMes === '県公式サイト') {
-    message = site;
-  }
-  //完成
-  if (userMes === '使い方') {
-    message = howToUse;
-  }
-  //完成
-  if (userMes === 'その他') {
-    message = other;
-  }
-  //完成
-  if (userMes === '水平展開を提案する') {
-    message = contact;
-  }
-
-
-  //travelIdが送られてきた時
-  else if (headMes === '@') {
-
-    var travelId = userMes.slice(1, 33); //traveldを取得
-    //travelIdでイベント情報を取得する
-
-
-    //そのデータをデータに埋め込んだメッセージを送る
-    //ない場合はありませんでした。を返す
-  }
-
 
   return message;
 };
-
-
 
 const postbackFunc = async function (event) {
   let message;
@@ -185,81 +180,16 @@ const postbackFunc = async function (event) {
     case '遊ぶ':
       message = play;
       break;
-    case '乗り物':
-      message = JSON.parse(map);
-      message.contents.body.contents[0].action.uri = `${url}?genre=乗り物&lat=34.385273&lng=132.455050&travelId=${travelId}`;
+    default:
+      message = map;
+      message.contents.body.contents[0].action.uri = `${url}?genre=${encodeURI(data)}&lat=34.385273&lng=132.455050&travelId=${travelId}`;
+      message.contents.body.contents[1].action.uri = `${url}?genre=${encodeURI(data)}&lat=34.409314&lng=133.205692&travelId=${travelId}`;
+      message.contents.body.contents[2].action.uri = `${url}?genre=${encodeURI(data)}&lat=34.348144&lng=132.332069&travelId=${travelId}`;
+      message.contents.body.contents[3].action.uri = `${url}?genre=${encodeURI(data)}&lat=34.402934&lng=132.456019&travelId=${travelId}`;
       break;
   }
-
-  //完成
-  if (event.postback.data === '見る') {
-    message = see;
-  }
-
-  if (event.postback.data === '見る/自然景観') {
-
-  }
-  if (event.postback.data === '見る/文化施設') {
-
-  }
-  if (event.postback.data === '見る/神社仏閣') {
-
-  }
-  if (event.postback.data === '見る/文化史跡') {
-
-  }
-  if (event.postback.data === '見る/公園/庭園') {
-
-  }
-  if (event.postback.data === '見る/動/植物') {
-
-  }
-  if (event.postback.data === '見る/施設景観') {
-
-  }
-  if (event.postback.data === '見る/その他') {
-
-  }
-  if (event.postback.data === '見る/全部') {
-
-  }
-  if (event.postback.data === '食べる') {
-
-  }
-  if (event.postback.data === '遊ぶ/文化施設') {
-
-  }
-  if (event.postback.data === '遊ぶ/温泉') {
-
-  }
-  if (event.postback.data === '遊ぶ/その他') {
-
-  }
-  if (event.postback.data === '遊ぶ/スポーツ/レジャー') {
-
-  }
-  if (event.postback.data === '遊ぶ/全部') {
-
-  }
-  if (event.postback.data === '乗り物') {
-
-  }
-  if (event.postback.data === '買い物') {
-
-  }
-  if (event.postback.data === 'ホテル') {
-
-  }
-  if (event.postback.data === 'その他') {
-
-  }
-  if (event.postback.data === '全部') {
-
-  }
-
   return message;
 };
-
 
 const createTravelId = async function (event) {
   let group = event.source.groupId;
@@ -318,4 +248,25 @@ const getTravelId = async function (event) {
   let res = JSON.parse(result2.Payload);
   let res2 = JSON.parse(res.body);
   return res2[0].travelId;
+};
+
+const postUser = async function (event, travelId) {
+  let userId = event.source.userId;
+  let params = {
+    FunctionName: 'travel-lambda-dev-hello',
+    InvocationType: 'RequestResponse',
+    Payload: JSON.stringify({
+      type: 'lambda',
+      path: '/user',
+      httpMethod: 'POST',
+      body: JSON.stringify({
+        travelId: travelId,
+        userId: userId
+      })
+    }),
+  };
+  let result = await lambda.invoke(params).promise();
+  let res = JSON.parse(result.Payload).body;
+  let res2 = JSON.parse(res);
+  return res2.travelId;
 };
