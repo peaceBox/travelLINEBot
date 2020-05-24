@@ -147,16 +147,34 @@ const messageFunc = async function (event) {
 
 
 const postbackFunc = async function (event) {
- 
   let message;
 
+  let idParams = {
+    FunctionName: `travel-lambda-dev-hello`,
+    InvocationType: "RequestResponse",
+    Payload: JSON.stringify({
+    type: 'lambda',
+    path: '/user', 
+    httpMethod: 'GET',
+    queryStringParameters: {
+      userId: event.source.groupId
+    }
+}),
+  };
+  let result2 = await lambda.invoke(idParams).promise(); 
+  let res = JSON.parse(result2.Payload);
+  let res2= JSON.parse(res.body);
+  let traverId  = res2[0].travelId
+
+  //完成
   if(event.postback.data === '見る'){
     message =see
   }
+
   if(event.postback.data === '見る/自然景観'){
+   
   }
   if(event.postback.data === '見る/文化施設'){
-   
 
   }
   if(event.postback.data === '見る/神社仏閣'){
@@ -208,10 +226,10 @@ const postbackFunc = async function (event) {
     
   }
   if(event.postback.data === 'その他'){
-    message = {type:"text",text:"全部"}
+   
   }
   if(event.postback.data === '全部'){
-    message = {type:"text",text:"全部"}
+    
   }
 
   return message;
@@ -259,7 +277,7 @@ const DelTravelId = async function (event){
 
 
 const getTravelId = async function (event){
-  let params = {
+  let idParams = {
     FunctionName: `travel-lambda-dev-hello`,
     InvocationType: "RequestResponse",
     Payload: JSON.stringify({
@@ -271,7 +289,7 @@ const getTravelId = async function (event){
     }
 }),
   };
-  let result2 = await lambda.invoke(params).promise(); 
+  let result2 = await lambda.invoke(idParams).promise(); 
   let res = JSON.parse(result2.Payload);
   let res2= JSON.parse(res.body);
   return res2[0].travelId
